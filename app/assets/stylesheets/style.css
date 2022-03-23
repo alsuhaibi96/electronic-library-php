@@ -388,8 +388,11 @@ text-align: center;
 }
 
 /* Sign in style*/
-
-.signin-modal-container{
+.sing-container{
+  background-color: rgba(0,0,0,0.3);
+height: 100px;
+}
+.signin-modal-container2{
   height: 100vh;
   width: 100vw;
      position: absolute;
@@ -397,7 +400,6 @@ text-align: center;
      background-color: rgba(0,0,0,0.3);
  padding-top: 100px;
 z-index: 1;
-display: none;
 }
 
 .signin-content-container{

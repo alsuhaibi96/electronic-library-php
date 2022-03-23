@@ -10,14 +10,14 @@ class App{
         $urlParts=explode('/',$_GET['url']);
         //        print_r($urlParts);
        
-        if(file_exists("../controllers/".$urlParts[0].".php")){
+        if(file_exists("app/controllers/".$urlParts[0].".php")){
           $this->controller=$urlParts[0];  
           unset($urlParts[0]);
         
         }
 
        // print_r($urlParts);
-    require_once "../controllers/".$this->controller.".php";
+    require_once "app/controllers/".$this->controller.".php";
 
 
     $c=new $this->controller;

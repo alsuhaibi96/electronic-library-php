@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/stylesheets/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 
-    <link rel="stylesheet" href="assets/stylesheets/mediaQuery.css">
+    <link rel="stylesheet" href="../assets/css/mediaQuery.css">
     <title>Cart</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
         The Header of the category Page
     -->
   
-    <?php require_once "./layouts/header.php";?>
+    <?php require_once "layouts/header.php";?>
 
 
                 <header class="header header--cart">

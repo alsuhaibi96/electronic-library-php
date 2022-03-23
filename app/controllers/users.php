@@ -1,5 +1,7 @@
 <?php
 require_once 'controller.php';
+require_once 'validator.php';
+
 class Users extends Controller
 {
     public function __construct()
@@ -28,16 +30,21 @@ class Users extends Controller
 
     function add_user()
     {
-        print_r($_POST);
+        // print_r($_POST);
         if(isset($_POST['submit']))
         {
-            $userName=$_POST['name'];
+            $phoneNumber=$_POST['phoneNumber'];
+            $firstName=$_POST['firstName'];
+            $lastName=$_POST['lastName'];
             $password=$_POST['password'];
             $email=$_POST['email'];
-           if($userName!=""&&$password!=""&&$email!="")
+           if($firstName!=""&&$lastName!=""&&$password!=""&&$email!=""&&$phoneNumber!="")
            {
+            
                $user_data =array(
-                   'name'=>$userName,
+                   'first_name'=>$firstName,
+                   'last_name'=>$lastName,
+                   'phone_number'=>$phoneNumber,
                    'password'=>md5($password),
                    'email'=>$email
                    
@@ -45,23 +52,57 @@ class Users extends Controller
                $u=$this->model('user');
                $message="";
                if($u->insert($user_data)){
-                   $type='success';
-                    $message="user created successful";
-                    $this->view('feedback',array('type'=>$type,'message'=>$message));
+                   $type='تم!';
+                    $message="تم إضافة مستخدم جديد ,<br>
+                    تسجيل الدخول ؟
+                    ";
+                    $this->view('login',array('type'=>$type,'message'=>$message));
 
                 }
-               else {
-                   $type='danger';
-                   $message="can not create user please check your data ";
+        
+               else  {
+                   $type='خطأ';
+                   $message="لايمكن إضافة مستخدم جديد ! <br>
+                   تحقق من البيانات
+                   ";
                
                    $this->view('register',array('type'=>$type,'message'=>$message,'form_values'=>$_POST));
 
                 }
-           } 
 
-        }
+                   //validating inputs
+
+
+           } 
         
-    }
+           $validtorObj=new Validator();
+           $message=[];
+           
+           if($validtorObj->validateName($firstName)==false){
+           $message[]=" خطأ في الاسم الاول";
+   
+           }
+            
+           if($validtorObj->validateName($lastName)==false){
+            $message[]=" خطأ في الاسم الاخير";
+    
+            }
+           if($validtorObj->validateEmail($email)==false){
+           $message[]="خطأ في الايميل";
+   
+           }
+           if($validtorObj->validatePhoneNumber($phoneNumber)==false){
+           $message[]="خطأ في رقم الهاتف";
+   
+           }
+           if($validtorObj->validatePassword($password)==false){
+               $message[]="خطأ في كلمة السر";
+       
+               }
+               $this->view('register',$message);
+               
+
+    }}
     function register()
     {
         $this->view('register');
@@ -79,8 +120,10 @@ class Users extends Controller
         $this->list_all();
 
 //        header('location:users/list_all');
-
-
         
     }
+
+
+
+
 }

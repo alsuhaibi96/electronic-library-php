@@ -3,7 +3,7 @@
 $dns = "mysql:host=localhost";
 $username = 'root';
 $password = '';
-$database_name = 'super-blog';
+$database_name = 'lib';
 
 /**
  * where
